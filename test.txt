@@ -1,7 +1,0 @@
-We are looking for the following properties: 
-The code should be correct. Show that the application correctly matches all substrings according to your stated lazy or greedy match policy and passes your provided test examples. 
-The code should be optimized for parsing a potentially large input text file. 
-The front end should be intuitive and useful (doesn't have to be complex). 
-Write a short blurb on how you would improve the look, feel, and performance of this application and how you've validated that the application behaves as designed. 
-Remember that you may integrate or use any framework of choice, but the regular expression parser must be from scratch.
-

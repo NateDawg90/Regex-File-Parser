@@ -52,12 +52,9 @@ class App extends Component {
     var payload = new FormData();
     payload.append("file", this.state.file);
     payload.append("regex", this.state.regex);
-     console.log('>> payload >> ', payload);
     var path = 'http://127.0.0.1:5000/parse';
     axios.post(path, payload, headers).then(response => {
-      debugger
       console.log(response);
-
     })
   }
 
