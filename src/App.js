@@ -15,9 +15,10 @@ class App extends Component {
     this.state = {
       file: null,
       regex: '',
-      err: ''
+      err: '',
+      matches: []
     }
-    this.extensions =  ['txt', 'docx', 'doc'];
+    this.extensions =  ['txt'];
     this.handleInputChange = this.handleInputChange.bind(this);
     this.parseFile = this.parseFile.bind(this);
   }  
@@ -35,7 +36,6 @@ class App extends Component {
           this.setState({ err, file });
           return;
         }
-       console.log(file);
         this.setState({ err, file });
       } else {
         this.setState({
@@ -47,18 +47,19 @@ class App extends Component {
   }
 
   parseFile() {
-    // Make request to python server
     var headers = { 'Content-Type': 'multipart/form-data', 'Access-Control-Allow-Origin': '*' };
     var payload = new FormData();
     payload.append("file", this.state.file);
     payload.append("regex", this.state.regex);
     var path = 'http://127.0.0.1:5000/parse';
     axios.post(path, payload, headers).then(response => {
-      console.log(response);
+      var matches = response.data.matches;
+      this.setState({ matches });
     })
   }
 
   render() {
+    var matches = this.state.matches.length > 0;
     return (
       <div className="App">
         <Header />
@@ -76,6 +77,17 @@ class App extends Component {
             Send
             <Icon >send</Icon>
           </Button>
+        </div>
+        <div className='w-80 center flex flex-wrap justify-center items-center mt3'>
+          {matches && (
+              <div>Indices:</div>
+          )}
+          {!matches && (
+              <div>No Indices!</div>
+          )}
+          {this.state.matches.map((m, idx) => {
+                  return <span key={idx} className='ma2'>{m}</span>
+          })}
         </div>
       </div>
     );

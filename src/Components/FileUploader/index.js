@@ -20,10 +20,8 @@ class FileUploader extends Component {
   render() {
     return (
       <div className=" br2">
-
         <Button containerelement='label' variant="contained" color="default"  onClick={this.upload} >
           <input type="file" onChange={this.props.onChange}/>
-          
          </Button>
       </div>
     );
