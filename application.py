@@ -25,11 +25,13 @@ def parse():
     if not req:
         abort(400)
     regex = req.get('regex')
-    fileContent = str(request.files['file'].read()).replace(r'\n', '')
+    myFile = request.files['file']
+    fileContent = str(myFile.read())
+    noNewLines = fileContent.replace(r'\n', '')
 
     p = re.compile(regex)
-    for r in p.finditer(fileContent):
-        matches.append(r.start())
+    for r in p.finditer(noNewLines):
+        matches.append(r.start() - 2)
 
     response = jsonify({'matches': matches})
     return response

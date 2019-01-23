@@ -47,9 +47,10 @@ class App extends Component {
   }
 
   parseFile() {
-    var headers = { 'Content-Type': 'multipart/form-data', 'Access-Control-Allow-Origin': '*' };
+    var headers = {  'Access-Control-Allow-Origin': '*' };
     var payload = new FormData();
     payload.append("file", this.state.file);
+    console.log(this.state.file)
     payload.append("regex", this.state.regex);
     var path = 'http://127.0.0.1:5000/parse';
     axios.post(path, payload, headers).then(response => {
